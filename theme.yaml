@@ -2,7 +2,7 @@ name: "OctoCart"
 author: "Sozonov Alexey"
 description: "Demo OctoCart theme."
 homepage: "https://demo.octobercms.info/octocart"
-code: "OctoCart"
+code: "OctoCart-Demo"
 
 require:
     - Xeor.OctoCart
