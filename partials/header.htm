@@ -1,0 +1,50 @@
+[cart basket]
+noProductsMessage = "No products found"
+==
+<header id="masthead" class="site-header" role="banner" style="background-image: none; ">
+    <div class="col-full">
+        <a class="skip-link screen-reader-text" href="#site-navigation">Skip to navigation</a>
+        <a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+        <div class="site-branding">
+            <div class="beta site-title"><a href="/" rel="home">Demo</a></div>
+            <p class="site-description">Just another October site</p></div>
+        <div class="site-search">
+            <div class="widget octocart widget_product_search">
+                <form role="search" method="get" class="octocart-product-search" action="http://octocart.dd/">
+                    <label class="screen-reader-text" for="octocart-product-search-field">Search for:</label>
+                    <input type="search" id="octocart-product-search-field" class="search-field"
+                           placeholder="Search Products&hellip;" value="" name="s" title="Search for:"/>
+                    <input type="submit" value="Search"/>
+                    <input type="hidden" name="post_type" value="product"/>
+                </form>
+            </div>
+        </div>
+        <div class="octocart-primary-navigation">
+            <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Primary Navigation">
+                <button class="menu-toggle" aria-controls="site-navigation" aria-expanded="false"><span>Menu</span>
+                </button>
+                <div class="menu">
+                    <ul>
+                        <li class="page_item {% if this.page.id == 'home' %}current_page_item{% endif %}"><a href="{{ 'home'|page }}">Home</a></li>
+                        <li class="page_item {% if this.page.id == 'cart' %}current_page_item{% endif %}"><a href="{{ 'cart'|page }}">Cart</a></li>
+                        <li class="page_item {% if this.page.id == 'checkout' %}current_page_item{% endif %}"><a href="{{ 'checkout'|page }}">Checkout</a></li>
+                        <li class="page_item {% if this.page.id == 'account' %}current_page_item{% endif %}"><a href="{{ 'account'|page }}">My Account</a></li>
+                        <li class="page_item {% if this.page.id == 'sample-page' %}current_page_item{% endif %}"><a href="{{ 'page'|page }}">Sample Page</a></li>
+                        <li class="page_item {% if this.page.id == 'shop' %}current_page_item{% endif %}"><a href="{{ 'shop'|page }}">Shop</a></li>
+                    </ul>
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li class="page_item{% if this.page.id == 'home' %}current_page_item{% endif %}"><a href="{{ 'home'|page }}">Home</a></li>
+                        <li class="page_item{% if this.page.id == 'cart' %}current_page_item{% endif %}"><a href="{{ 'cart'|page }}">Cart</a></li>
+                        <li class="page_item{% if this.page.id == 'checkout' %}current_page_item{% endif %}"><a href="{{ 'checkout'|page }}">Checkout</a></li>
+                        <li class="page_item{% if this.page.id == 'account' %}current_page_item{% endif %}"><a href="{{ 'account'|page }}">My Account</a></li>
+                        <li class="page_item{% if this.page.id == 'sample-page' %}current_page_item{% endif %}"><a href="{{ 'page'|page }}">Sample Page</a></li>
+                        <li class="page_item{% if this.page.id == 'shop' %}current_page_item{% endif %}"><a href="{{ 'shop'|page }}">Shop</a></li>
+                    </ul>
+                </div>
+            </nav><!-- #site-navigation -->
+            {% component 'basket' %}
+        </div>
+    </div>
+</header><!-- #masthead -->

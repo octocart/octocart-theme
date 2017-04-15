@@ -1,0 +1,25 @@
+<form class="login"
+    data-request="onSignin">
+    <p class="octocart-FormRow octocart-FormRow--wide form-row form-row-wide">
+        <label for="userSigninLogin">Email <span class="required">*</span></label>
+        <input name="login"
+               type="text"
+               class="octocart-Input octocart-Input--text input-text"
+               id="userSigninLogin"
+               placeholder="Enter your {{ loginAttributeLabel|lower }}" />
+    </p>
+    <p class="octocart-FormRow octocart-FormRow--wide form-row form-row-wide">
+        <label for="password">Password <span class="required">*</span></label>
+        <input name="password"
+               type="password"
+               class="octocart-Input octocart-Input--text input-text"
+               id="userSigninPassword"
+               placeholder="Enter your password" />
+    </p>
+    <p class="form-row">
+        <button type="submit" class="octocart-Button button">Sign in</button>
+    </p>
+    <p class="octocart-LostPassword lost_password">
+        <a href="/lost-password/">Lost your password?</a>
+    </p>
+</form>

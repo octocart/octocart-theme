@@ -1,0 +1,14 @@
+title = "Shop"
+url = "/shop/:page?"
+layout = "default"
+is_hidden = 0
+
+[products]
+pageNumber = "{{ :page }}"
+productsPerPage = 6
+noProductsMessage = "No products found"
+sortOrder = "created_at desc"
+==
+<h1 class="page-title">{{ this.page.title }}</h1>
+<!-- Products -->
+{% component 'products' %}

@@ -1,0 +1,5 @@
+{% for order in orders %}
+    <li>
+        <a href="{{ order.url }}">Order №{{ order.id }}</a> - {{ order.created_at|date('M d, Y') }}
+    </li>
+{% endfor %}

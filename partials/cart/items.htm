@@ -1,0 +1,120 @@
+{% if not items is empty %}
+    <table class="shop_table shop_table_responsive cart" cellspacing="0">
+        <thead>
+        <tr>
+            <th class="product-remove">&nbsp;</th>
+            <th class="product-thumbnail">&nbsp;</th>
+            <th class="product-name">Product</th>
+            <th class="product-price">Price</th>
+            <th class="product-quantity">Quantity</th>
+            <th class="product-subtotal">Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for itemId, item in items %}
+            {% set product = item.product %}
+            {% set quantity = item.quantity %}
+            {% set price = item.price %}
+            {% set attributes = item.attributes %}
+
+            <tr class="cart_item">
+
+                <td class="product-remove">
+                    <button
+                            type="button"
+                            class="remove btn btn-danger"
+                            title="Remove this item"
+                            data-request="onRemoveProduct"
+                            data-request-data="itemId: '{{ itemId }}'"
+                            data-request-success="location.reload()"
+                    ><i class="fa fa-remove"></i></button>
+                </td>
+
+                <td class="product-thumbnail">
+                    <a href="{{ product.url }}">
+                    {% if product.images.count %}
+                        {% for image in product.images|slice(0, 1) %}
+                            <img data-src="{{ image.filename }}"
+                                 src="{{ image.path }}"
+                                 class="product-image img-responsive"
+                                 alt="{{ product.title }}" />
+                        {% endfor %}
+                    {% else %}
+                        <img src="http://placehold.it/150x150" class="product-image img-responsive" alt="{{ product.title }}">
+                    {% endif %}
+                    </a>
+                </td>
+
+                <td class="product-name" data-title="Product">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                </td>
+
+                <td class="product-price" data-title="Price">
+                    <span class="octocart-Price-amount amount">
+                        {{ price|price }}
+                    </span>
+                </td>
+
+                <td class="product-quantity" data-title="Quantity">
+                    <div class="quantity">
+                        <input
+                                type="number"
+                                name="quantity"
+                                class="input-text qty text"
+                                data-track-input
+                                style="max-width:50px;"
+                                value="{{ quantity }}"
+                                data-request="onUpdateQuantity"
+                                data-request-success="location.reload()"
+                                data-request-data="itemId: '{{ itemId }}'"
+                                title="Qty"
+                        />
+                    </div>
+                </td>
+
+                <td class="product-subtotal" data-title="Total">
+                    <span class="woocommerce-Price-amount amount">
+                        {{ (quantity * price)|price }}
+                    </span>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+            <td colspan="6">
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-request="onClear"
+                    title="Remove all items"
+                    data-request-success="location.reload()">
+                    <i class="fa fa-trash"></i> Clear</button>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <div class="cart-collaterals">
+        <div class="cart_totals ">
+            <h2>Cart Totals</h2>
+            <table cellspacing="0" class="shop_table shop_table_responsive">
+                <tr class="cart-subtotal">
+                    <th>VAT</th>
+                    <td data-title="Subtotal"><span class="octocart-Price-amount amount">{{ totalPrice.vat|price }}</span></td>
+                </tr>
+                <tr class="order-total">
+                    <th>Total</th>
+                    <td data-title="Total"><strong><span class="octocart-Price-amount amount">{{ totalPrice.total|price }}</span></strong></td>
+                </tr>
+            </table>
+            <div class="oc-proceed-to-checkout">
+                <a href="/{{ checkoutPage }}" class="checkout-button button alt forward oc-forward">
+                    Proceed to Checkout</a>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <p class="cart-empty">{{ noProductsMessage }}</p>
+    <p class="return-to-shop"><a class="button wc-backward" href="/shop/">Return To Shop</a></p>
+{% endif %}

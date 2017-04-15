@@ -1,0 +1,251 @@
+<form name="checkout" action="" class="checkout octocart-checkout" data-request="onCheckout" data-request-redirect="/{{ successPage }}">
+
+    <div class="col2-set" id="customer_details">
+        <div class="col-1">
+            <div class="octocart-billing-fields">
+                <h3>Billing Details</h3>
+
+                <p class="form-row form-row validate-required"
+                   id="billing_name_field">
+                    <label for="billing_name" class="">
+                        Name <abbr class="required" title="required">*</abbr>
+                    </label>
+                    <input type="text"
+                           id="billing_name"
+                           class="input-text "
+                           name="billing[name]"
+                           placeholder=""
+                           required="true"
+                           value=""  />
+                </p>
+
+                <p class="form-row form-row form-row-first validate-required validate-email" id="billing_email_field">
+                    <label for="billing_email" class="">
+                        Email Address <abbr class="required" title="required">*</abbr>
+                    </label>
+                    <input type="email"
+                           class="input-text "
+                           name="billing[email]"
+                           id="billing_email"
+                           placeholder=""
+                           autocomplete="email"
+                           required="true"
+                           value=""  />
+                </p>
+
+                <p class="form-row form-row form-row-last validate-required validate-phone" id="billing_phone_field">
+                    <label for="billing_phone" class="">
+                        Phone <abbr class="required" title="required">*</abbr>
+                    </label>
+                    <input type="tel"
+                           class="input-text "
+                           name="billing[phone]"
+                           id="billing_phone"
+                           placeholder=""
+                           autocomplete="tel"
+                           required="true"
+                           value=""  />
+                </p>
+
+                <div class="clear"></div>
+
+                <p class="form-row form-row form-row-wide address-field validate-required" id="billing_address_1_field">
+                    <label for="billing_address_1" class="">Address <abbr class="required" title="required">*</abbr></label>
+                    <input type="text"
+                           class="input-text "
+                           name="billing[address]"
+                           id="billing_address_1"
+                           autocomplete="address-line1"
+                           required="true"
+                           value=""  />
+                </p>
+
+                <p class="form-row form-row form-row-wide address-field validate-required" id="billing_city_field">
+                    <label for="billing_city" class="">
+                        Town / City <abbr class="required" title="required">*</abbr>
+                    </label>
+                    <input type="text"
+                           class="input-text "
+                           name="billing[town]"
+                           id="billing_city"
+                           placeholder=""
+                           autocomplete="address-level2"
+                           required="true"
+                           value=""  />
+                </p>
+
+                <p class="form-row form-row form-row-first address-field validate-required validate-state" id="billing_state_field">
+                    <label for="billing_state" class="">
+                        State / County <abbr class="required" title="required">*</abbr>
+                    </label>
+                    <input type="text"
+                           class="input-text "
+                           value=""
+                           placeholder=""
+                           autocomplete="address-level1"
+                           name="billing[country]"
+                           required="true"
+                           id="billing_state"
+                    /></p>
+
+                <p class="form-row form-row form-row-last address-field validate-required validate-postcode" id="billing_postcode_field">
+                    <label for="billing_postcode" class="">Postcode / ZIP <abbr class="required" title="required">*</abbr></label>
+                    <input type="text"
+                           class="input-text "
+                           name="billing[postcode]"
+                           id="billing_postcode"
+                           placeholder=""
+                           autocomplete="postal-code"
+                           required="true"
+                           value=""  />
+                </p>
+
+                <div class="clear"></div>
+
+
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="octocart-shipping-fields">
+                <h3>Shipping Details</h3>
+
+                <p class="form-row form-row-wide create-account">
+                    <input class="input-checkbox" id="copy-address" type="checkbox" />
+                    <label for="copy-address" class="checkbox">Same as billing address</label>
+                </p>
+
+                <p class="form-row form-row validate-required"
+                   id="shipping_name_field">
+                    <label for="shipping_name" class="">
+                        Name <abbr class="required" title="required">*</abbr>
+                    </label>
+                    <input type="text"
+                           id="shipping_name"
+                           class="input-text "
+                           name="shipping[name]"
+                           placeholder=""
+                           required="true"
+                           value=""  />
+                </p>
+
+                <p class="form-row form-row form-row-first validate-required validate-email" id="shipping_email_field">
+                    <label for="shipping_email" class="">
+                        Email Address <abbr class="required" title="required">*</abbr>
+                    </label>
+                    <input type="email"
+                           class="input-text "
+                           name="shipping[email]"
+                           id="shipping_email"
+                           placeholder=""
+                           autocomplete="email"
+                           required="true"
+                           value=""  />
+                </p>
+
+                <p class="form-row form-row form-row-last validate-required validate-phone" id="shipping_phone_field">
+                    <label for="shipping_phone" class="">
+                        Phone <abbr class="required" title="required">*</abbr>
+                    </label>
+                    <input type="tel"
+                           class="input-text "
+                           name="shipping[phone]"
+                           id="shipping_phone"
+                           placeholder=""
+                           autocomplete="tel"
+                           required="true"
+                           value=""  />
+                </p>
+
+                <div class="clear"></div>
+
+                <p class="form-row form-row form-row-wide address-field validate-required" id="shipping_address_1_field">
+                    <label for="shipping_address_1" class="">Address <abbr class="required" title="required">*</abbr></label>
+                    <input type="text"
+                           class="input-text "
+                           name="shipping[address]"
+                           id="shipping_address_1"
+                           autocomplete="address-line1"
+                           required="true"
+                           value=""  />
+                </p>
+
+                <p class="form-row form-row form-row-wide address-field validate-required" id="shipping_city_field">
+                    <label for="shipping_city" class="">
+                        Town / City <abbr class="required" title="required">*</abbr>
+                    </label>
+                    <input type="text"
+                           class="input-text " n
+                           ame="shipping[town]"
+                           id="shipping_city"
+                           placeholder=""
+                           autocomplete="address-level2"
+                           required="true"
+                           value=""  />
+                </p>
+
+                <p class="form-row form-row form-row-first address-field validate-required validate-state" id="shipping_state_field">
+                    <label for="shipping_state" class="">
+                        State / County <abbr class="required" title="required">*</abbr>
+                    </label>
+                    <input type="text"
+                           class="input-text "
+                           value=""
+                           placeholder=""
+                           autocomplete="address-level1"
+                           name="shipping[country]"
+                           required="true"
+                           id="shipping_state"
+                    /></p>
+
+                <p class="form-row form-row form-row-last address-field validate-required validate-postcode" id="shipping_postcode_field">
+                    <label for="shipping_postcode" class="">Postcode / ZIP <abbr class="required" title="required">*</abbr></label>
+                    <input type="text"
+                           class="input-text "
+                           name="shipping[postcode]"
+                           id="shipping_postcode"
+                           placeholder=""
+                           autocomplete="postal-code"
+                           required="true"
+                           value=""  />
+                </p>
+
+                <div class="clear"></div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <h3 id="order_review_heading">Your order</h3>
+
+    <div id="order_review" class="octocart-checkout-review-order">
+
+        <table class="shop_table octocart-checkout-review-order-table">
+            <tfoot>
+                <tr class="cart-subtotal">
+                    <th>Vat</th>
+                    <td><span class="octocart-Price-amount amount">{{ total.vat|price }}</span></td>
+                </tr>
+                <tr class="order-total">
+                    <th>Total</th>
+                    <td><strong><span class="octocart-Price-amount amount">{{ total.total|price }}</span></strong></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <div id="payment" class="octocart-checkout-payment">
+            <ul class="oc_payment_methods payment_methods methods">
+                <li>Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.</li>		</ul>
+            <div class="form-row place-order">
+                <noscript>
+                    Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.			<br/><input type="submit" class="button alt" name="octocart_checkout_update_totals" value="Update totals" />
+                </noscript>
+
+
+                <button class="button alt" type="submit">Place order</button>
+
+            </div>
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,15 @@
+<form
+        data-request="{{ __SELF__ }}::onRestorePassword"
+        data-request-update="'{{ __SELF__ }}::reset': '#partialUserResetForm'">
+
+    <p class="octocart-FormRow octocart-FormRow--wide form-row form-row-wide">
+        <label for="userRestoreEmail">Email</label>
+        <input name="email"
+               type="email"
+               class="octocart-Input octocart-Input--text input-text"
+               id="userRestoreEmail"
+               placeholder="Enter your email" />
+    </p>
+
+    <button type="submit" class="octocart-Button button">Restore password</button>
+</form>

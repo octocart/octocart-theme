@@ -1,0 +1,23 @@
+{% if not user %}
+
+    <div class="col-alpha">
+        <h3>Sign in</h3>
+        {% partial __SELF__ ~ '::signin' %}
+    </div>
+
+    <div class="col-beta">
+        <h3>Register</h3>
+        {% partial __SELF__ ~ '::register' %}
+    </div>
+
+{% else %}
+
+    {% partial __SELF__ ~ '::activation_check' %}
+
+    {% partial __SELF__ ~ '::update' %}
+
+    {% partial __SELF__ ~ '::deactivate_link' %}
+
+    {% partial __SELF__ ~ '::logout_link' %}
+
+{% endif %}

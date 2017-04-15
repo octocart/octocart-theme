@@ -1,0 +1,12 @@
+title = "Orders"
+url = "/orders"
+layout = "default"
+is_hidden = 0
+
+[orders]
+
+[session]
+security = "user"
+redirect = "home"
+==
+{% component 'orders' %}{% component 'session' %}

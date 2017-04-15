@@ -1,0 +1,35 @@
+<footer id="colophon" class="site-footer" role="contentinfo">
+    <div class="col-full">
+        <div class="site-info">
+            &copy; Demo {{ "now"|date("Y") }} <br/>
+            Designed for OctoCart inspired by WooCommerce.
+        </div><!-- .site-info -->
+        <div class="octocart-handheld-footer-bar">
+            <ul class="columns-3">
+                <li class="my-account">
+                    <a href="http://octocart.dd/my-account/">My Account</a></li>
+                <li class="search">
+                    <a href="{{ 'search'|page }}">Search</a>
+                    <div class="site-search">
+                        <div class="widget octocart widget_product_search">
+                            <form role="search" method="get" class="octocart-product-search"
+                                  action="http://octocart.dd/">
+                                <label class="screen-reader-text" for="octocart-product-search-field">Search
+                                    for:</label>
+                                <input type="search" id="octocart-product-search-field" class="search-field"
+                                       placeholder="Search Products&hellip;" value="" name="s" title="Search for:"/>
+                                <input type="submit" value="Search"/>
+                                <input type="hidden" name="post_type" value="product"/>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                <li class="cart">
+                    <a class="footer-cart-contents" href="http://octocart.dd/cart/" title="View your shopping cart">
+                        <span class="count">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div><!-- .col-full -->
+</footer><!-- #colophon -->

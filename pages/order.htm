@@ -1,0 +1,13 @@
+title = "Order"
+url = "/order/:id"
+layout = "default"
+is_hidden = 0
+
+[session]
+security = "user"
+redirect = "home"
+
+[order]
+id = "{{ :id }}"
+==
+{% component 'session' %}{% component 'order' %}

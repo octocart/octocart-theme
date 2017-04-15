@@ -1,0 +1,23 @@
+title = "Category"
+url = "/categories/:slug/:page?"
+layout = "default"
+is_hidden = 0
+
+[products]
+pageNumber = "{{ :page }}"
+categoryFilter = "{{ :slug }}"
+productsPerPage = 8
+noProductsMessage = "No products found"
+sortOrder = "created_at desc"
+categoryPage = "category"
+productDisplayPage = "product"
+==
+function onEnd() {
+    $slug = $this->param('slug');
+    $category = Xeor\OctoCart\Models\Category::where('slug', $slug)->first();
+    $this->page->title = $category->title;
+}
+==
+<h1 class="page-title">{{ this.page.title }}</h1>
+<!-- Products -->
+{% component 'products' %}

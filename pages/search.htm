@@ -1,0 +1,47 @@
+title = "Search"
+url = "/search/:page?"
+layout = "default"
+is_hidden = 0
+
+[products]
+pageNumber = "{{ :page }}"
+productsPerPage = 8
+noProductsMessage = "No products found"
+sortOrder = "created_at desc"
+categoryPage = "category"
+productDisplayPage = "product"
+==
+function onEnd() {
+    $this->page->search = isset($_GET['search']) ? $_GET['search'] : '';
+}
+==
+<div class="spacer"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="space-bottom-2x">Search</h1>
+                    </div>
+                </div>
+                <div class="row space-bottom-2x">
+                    <div class="col-md-12">
+                        <form action="/search" method="" class="form-inline">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="search" value="{{ this.page.search }}" />
+                                <button type="submit" class="btn btn-default">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Products -->
+            {% component 'products' %}
+        </div>
+    </div>
+</div>

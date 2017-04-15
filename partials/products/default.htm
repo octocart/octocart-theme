@@ -1,0 +1,93 @@
+{% set products = __SELF__.products %}
+
+<ul class="products">
+    {% for product in products %}
+        <li class="product-{{ product.id }}
+                   product
+                   {% if product.published %}status-publish{% endif %}
+                   {% if (loop.index == 1) or ((loop.index%4) == 0) %}first{% endif %}
+                   {% if (loop.index%3) == 0 %}last{% endif %}
+                   {{ product.stock_status }}
+                   {{ "product-type-" ~ product.type }}">
+            <a href="{{ product.url }}" class="octocart-LoopProduct-link">
+                {% if product.images.count %}
+                    {% for image in product.images|slice(0, 1) %}
+                        <img data-src="{{ image.filename }}"
+                             src="{{ image.path }}"
+                             width="300"
+                             height="300"
+                             class="img-responsive product-image"
+                             title="{{ product.title }}"
+                             alt="{{ product.title }}"/>
+                    {% endfor %}
+                {% else %}
+                    <img src="http://placehold.it/300x300" class="img-responsive product-image" title="{{ product.title }}" alt="{{ product.title }}">
+                {% endif %}
+                <h3>{{ product.title }}</h3>
+
+                <span class="price"><span class="octocart-Price-amount amount">{{ product.price|price }}</span></span>
+            </a>
+            <!--
+            <div class="description"><p>{{ product.description|striptags[:100] ~ '...' }}</p></div>
+
+            <div class="categories"><p>
+                    {% if product.categories.count %}
+                        {% for category in product.categories %}
+                            <a
+                            href="{{ category.url }}">{{ category.title }}</a>{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </p></div>
+            -->
+            {{ form_open({ 'class': '', 'data-request': 'onAddToCart', 'data-request-success': 'location.reload()' }) }}
+            <input type="hidden" name="productId" value="{{ product.id }}"/>
+            <input type="hidden" name="quantity" value="1"/>
+            <!--{% set name = '' %}
+            {% set first = false %}
+            {% for attribute in product.productAttributes %}
+                {% if name != attribute.name %}
+                    {% set name = attribute.name %}
+                    {% set first = true %}
+                    <strong style="display: block">{{ attribute.name }}:</strong>
+                {% else %}
+                    {% set first = false %}
+                {% endif %}
+                <div class="radio" style="display: inline-block;">
+                    <label><input value="{{ attribute.value }}" type="radio"
+                                  name="attributes[{{ attribute.name }}]" {% if first == true %} checked {% endif %}> {{ attribute.value }}
+                    </label>
+                </div>
+            {% endfor %}
+            <p>&nbsp;</p>-->
+                <p>
+                <button type="submit" class="button product_type_{{ product.type }} add_to_cart_button ajax_add_to_cart"><i
+                            class="fa fa-shopping-cart"></i> Add to cart
+                </button></p>
+            {{ form_close() }}
+        </li>
+    {% else %}
+        <h3 class="text-center">{{ noProductsMessage }}</h3>
+    {% endfor %}
+</ul>
+
+<nav class="octocart-pagination">
+    {% if products.lastPage > 1 %}
+        <ul class="page-numbers">
+            {% if products.currentPage > 1 %}
+                <li><a href="{{ this.page.baseFileName|page({ (pageParam): (products.currentPage-1) }) }}" class="prev page-numbers">&larr;
+                        Prev</a></li>
+            {% endif %}
+
+            {% for page in 1..products.lastPage %}
+                <li class="{{ products.currentPage == page ? 'active' : null }}">
+                    <a href="{{ this.page.baseFileName|page({ (pageParam): page }) }}" class="page-numbers {{ products.currentPage == page ? 'current' : null }}">{{ page }}</a>
+                </li>
+            {% endfor %}
+
+            {% if products.lastPage > products.currentPage %}
+                <li><a href="{{ this.page.baseFileName|page({ (pageParam): (products.currentPage+1) }) }}" class="next page-numbers">Next
+                        &rarr;</a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</nav>

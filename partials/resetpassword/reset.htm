@@ -1,0 +1,25 @@
+<form
+    data-request="{{ __SELF__ }}::onResetPassword"
+    data-request-update="'{{ __SELF__ }}::complete': '#partialUserResetForm'">
+
+    <p class="octocart-FormRow octocart-FormRow--wide form-row form-row-wide">
+        <label for="resetCode">Activation Code</label>
+        <input name="code"
+               type="text"
+               class="octocart-Input octocart-Input--text input-text"
+               id="resetCode"
+               placeholder="Enter the activation code"
+               value="{{ __SELF__.code }}" />
+    </p>
+
+    <p class="octocart-FormRow octocart-FormRow--wide form-row form-row-wide">
+        <label for="resetPassword">New Password</label>
+        <input name="password"
+               type="password"
+               class="octocart-Input octocart-Input--text input-text"
+               id="resetPassword"
+               placeholder="Enter a new password" />
+    </p>
+
+    <button type="submit" class="octocart-Button button">Reset password</button>
+</form>

@@ -1,0 +1,38 @@
+{% partial __SELF__ ~ "::items" items=__SELF__.items %}
+
+{% if crossSells.count %}
+    <h2>You may also like…</h2>
+    <ul class="products">
+    {% for product in crossSells %}
+        <li class="product-{{ product.id }}
+                    product
+                    {% if product.published %}status-publish{% endif %}
+                    {% if loop.index == 1 %}first{% endif %}
+                    {% if loop.index == products.count %}last{% endif %}
+                    {{ product.stock_status }}
+                    {{ "product-type-" ~ product.type }}">
+            <a href="{{ product.url }}" class="octocart-LoopProduct-link">
+                {% if product.images.count %}
+                    {% for image in product.images|slice(0, 1) %}
+                        <img data-src="{{ image.filename }}"
+                             src="{{ image.path }}"
+                             width="300"
+                             height="300"
+                             class="img-responsive product-image"
+                             title="{{ product.title }}"
+                             alt="{{ product.title }}"/>
+                    {% endfor %}
+                {% else %}
+                    <img src="http://placehold.it/300x300" class="img-responsive product-image" title="{{ product.title }}" alt="{{ product.title }}">
+                {% endif %}
+                <h3>{{ product.title }}</h3>
+
+                <span class="price"><span class="octocart-Price-amount amount">{{ product.price|price }}</span></span>
+            </a>
+            <a href="{{ crossSell.url }}" class="button product_type_{{ product.type }}"><i
+                        class="fa fa-eye"></i> View
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endif %}

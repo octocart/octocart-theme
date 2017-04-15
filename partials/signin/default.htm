@@ -1,0 +1,11 @@
+<div style="padding: 40px 0;"></div>
+{% if not user %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <h3>Sign In</h3>
+                {% partial __SELF__ ~ '::signin' %}
+            </div>
+        </div>
+    </div>
+{% endif %}

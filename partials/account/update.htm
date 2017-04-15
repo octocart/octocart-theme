@@ -1,0 +1,39 @@
+{{ form_ajax('onUpdate', { model: user }) }}
+
+    <p class="octocart-FormRow octocart-FormRow--wide form-row form-row-wide">
+        <label for="accountName">Full Name</label>
+        <input name="name"
+               type="text"
+               class="octocart-Input octocart-Input--text input-text"
+               id="accountName"
+               value="{{ form_value('name') }}" />
+    </p>
+
+    <p class="octocart-FormRow octocart-FormRow--wide form-row form-row-wide">
+        <label for="accountEmail">Email</label>
+        <input name="email"
+               type="email"
+               class="octocart-Input octocart-Input--text input-text"
+               id="accountEmail"
+               value="{{ form_value('email') }}" />
+    </p>
+
+    <p class="octocart-FormRow octocart-FormRow--wide form-row form-row-wide">
+        <label for="accountPassword">New Password</label>
+        <input name="password"
+               type="password"
+               class="octocart-Input octocart-Input--text input-text"
+               id="accountPassword"  />
+    </p>
+
+    <p class="octocart-FormRow octocart-FormRow--wide form-row form-row-wide">
+        <label for="accountPasswordConfirm">Confirm New Password</label>
+        <input name="password_confirmation"
+               type="password"
+               class="octocart-Input octocart-Input--text input-text"
+               id="accountPasswordConfirm"  />
+    </p>
+
+    <button type="submit" class="octocart-Button button">Save</button>
+
+{{ form_close() }}

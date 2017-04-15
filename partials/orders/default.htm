@@ -1,0 +1,12 @@
+<hr>
+<h3>Orders</h3>
+{% if __SELF__.orders.count %}
+    <ul class="order-list">
+        {% partial __SELF__ ~ "::items"
+        orders = __SELF__.orders
+        %}
+    </ul>
+{% else %}
+    <h4>{{ noOrdersMessage }}</h4>
+{% endif %}
+<hr>

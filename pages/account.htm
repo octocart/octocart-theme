@@ -1,0 +1,21 @@
+title = "My Account"
+url = "/my-account"
+layout = "default"
+is_hidden = 0
+
+[account]
+paramCode = "code"
+forceSecure = 0
+
+[orders]
+noOrdersMessage = "No orders found"
+
+[session]
+security = "all"
+==
+<h1 class="page-title">{{ this.page.title }}</h1>
+{% component 'account' %}
+{% component 'session' %}
+{% if user %}
+{% component 'orders' %}
+{% endif %}

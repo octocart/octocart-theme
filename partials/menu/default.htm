@@ -1,0 +1,10 @@
+<div id="categories" class="widget widget_categories"><span class="gamma widget-title">Categories</span>
+    {% if __SELF__.categories %}
+        <ul>
+            {% partial __SELF__ ~ "::items"
+            categories = __SELF__.categories
+            currentCategorySlug = __SELF__.currentCategorySlug
+            %}
+        </ul>
+    {% endif %}
+</div>

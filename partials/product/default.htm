@@ -1,0 +1,174 @@
+{% set product = __SELF__.product %}
+{% set upSells = __SELF__.upSells %}
+
+<div itemscope
+     itemtype="http://schema.org/Product"
+     id="product-{{ product.id }}"
+     class="post-{{ product.id }}
+            product
+            {% if product.published %}status-publish{% endif %}
+            {{ product.stock_status }}
+            {{ "product-type-" ~ product.type }}">
+
+    <div class="images">
+    {% if product.images.count %}
+        <ul class="bxslider">
+            {% for image in product.images %}
+                <li>
+                    <img src="{{ image.path }}"
+                         class="oc-product-image img-responsive"
+                         alt="{{ product.title }}" />
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="gallery-thumbs-container">
+            <ul id="gallery-thumbs" class="gallery-thumbs-list">
+                {% for image in product.images %}
+                    <li class="thumb-item">
+                        <div class="thumb">
+                            <a href="javascript:;" itemprop="image">
+                                <img data-src="{{ image.filename }}"
+                                     src="{{ image.path }}"
+                                     class="oc-product-image img-responsive"
+                                     alt="{{ product.title }}" />
+                            </a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <img src="http://placehold.it/210x210" class="oc-product-image img-responsive" alt="{{ product.title }}">
+    {% endif %}
+    </div>
+
+    <div class="summary entry-summary">
+
+        <h1 itemprop="name" class="product_title entry-title">{{ product.title }}</h1>
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <p class="price">
+                <span class="octocart-Price-amount amount">
+                    {{ product.price|price }}
+                </span>
+            </p>
+            <meta itemprop="price" content="{{ product.price }}" />
+            <meta itemprop="priceCurrency" content="USD" />
+            <link itemprop="availability" href="http://schema.org/{{ str_camel(product.stock_status) }}" />
+        </div>
+        <div itemprop="description">
+            <p>{{ product.excerpt|raw }}</p>
+        </div>
+
+        {{ form_open({ 'class': 'cart', 'data-request': 'onAddToCart', 'data-request-success': 'location.reload()' }) }}
+
+        {% if product.productAttributes.count %}
+            <div class="product-attributes">
+                <p><strong>Attributes: </strong></p>
+                {% set name = '' %}
+                {% set first = false %}
+                {% for attribute in product.productAttributes %}
+                    {% if name != attribute.name %}
+                        {% set name = attribute.name %}
+                        {% set first = true %}
+                        <strong style="display: block">{{ attribute.name }}:</strong>
+                    {% else %}
+                        {% set first = false %}
+                    {% endif %}
+                    <div class="radio" style="display: inline-block;">
+                        <label><input value="{{ attribute.value }}" type="radio" name="attributes[{{ attribute.name }}]" {% if first == true %} checked {% endif %}> {{ attribute.value }}</label>
+                    </div>
+                {% endfor %}
+                <hr>
+            </div>
+        {% endif %}
+
+        {% if product.sale_price %}
+            <h3><del>{{ product.price|price() }}</del> {{ product.sale_price|price() }}</h3>
+        {% else %}
+            <h3>{{ product.price|price() }}</h3>
+        {% endif %}
+
+        <input type="hidden" name="productId" value="{{ product.id }}" />
+
+        <div class="quantity">
+            <input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="[0-9]*" inputmode="numeric" />
+        </div>
+
+        <button type="submit" class="single_add_to_cart_button button alt">Add to cart</button>
+        {{ form_close() }}
+
+        <div class="product_meta">
+            {% if product.categories.count %}
+            <span class="posted_in">Categories:
+                <p>
+                    {% for category in product.categories %}
+                        <a href="{{ category.url }}" rel="tag">{{ category.title }}</a>{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+            </span>
+            {% endif %}
+        </div>
+
+    </div><!-- .summary -->
+
+
+    <div class="octocart-tabs oc-tabs-wrapper">
+        <ul class="tabs oc-tabs">
+            <li class="description_tab">
+                <a href="#tab-description">Description</a>
+            </li>
+            <li class="reviews_tab">
+                <a href="#tab-reviews">Reviews (0)</a>
+            </li>
+        </ul>
+        <div class="octocart-Tabs-panel octocart-Tabs-panel--description panel entry-content oc-tab" id="tab-description">
+            {{ product.description|raw }}
+        </div>
+        <div class="octocart-Tabs-panel octocart-Tabs-panel--reviews panel entry-content oc-tab" id="tab-reviews">
+            <p>...</p>
+        </div>
+    </div>
+
+
+    {% if upSells.count %}
+    <div class="related products">
+        <h2>You may also like…</h2>
+        <ul class="products">
+        {% for upSell in upSells %}
+            <li class="product-{{ product.id }}
+                       product
+                       {% if upSell.published %}status-publish{% endif %}
+                       {% if loop.index == 1 %}first{% endif %}
+                       {% if loop.index == upSells.count %}last{% endif %}
+                       {{ upSell.stock_status }}
+                       {{ "product-type-" ~ upSell.type }}">
+
+                <a href="{{ upSell.url }}" class="octocart-LoopProduct-link">
+                    {% if upSell.images.count %}
+                        {% for image in upSell.images|slice(0, 1) %}
+                            <img data-src="{{ image.filename }}"
+                                 src="{{ image.path }}"
+                                 width="300"
+                                 height="300"
+                                 class="img-responsive product-image"
+                                 title="{{ upSell.title }}"
+                                 alt="{{ upSell.title }}"/>
+                        {% endfor %}
+                    {% else %}
+                        <img src="http://placehold.it/300x300" class="img-responsive product-image" title="{{ upSell.title }}" alt="{{ upSell.title }}">
+                    {% endif %}
+                    <h3>{{ product.title }}</h3>
+
+                    <span class="price"><span class="octocart-Price-amount amount">{{ upSell.price|price }}</span></span>
+                </a>
+
+                <a rel="nofollow" href="{{ upSell.url }}" class="button">View</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+    <meta itemprop="url" content="{{ product.url|page }}" />
+
+</div><!-- #product-{{ product.id }} -->
