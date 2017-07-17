@@ -1,15 +1,8 @@
-# Compiled CSS
-*.css
-
-# Minified js
-*.min.js
-
 # Sass
 .sass-cache
 
 # Grunt
 /node_modules/
-/storefront/
 npm-debug.log
 
 # PhpStorm
