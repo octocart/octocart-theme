@@ -74,16 +74,16 @@
             <div class="col-md-5 col-md-offset-1">
                 <h2>Billing Info</h2>
                 {% if not order.billing_info is empty %}
-                    {% for name, value in order.billing_info %}
-                        {{ value }}<br>
+                    {% for row in order.billing_info %}
+                        {{ row.value }}<br>
                     {% endfor %}
                 {% endif %}
             </div>
             <div class="col-md-5">
                 <h2>Shipping Info</h2>
                 {% if not order.shipping_info is empty %}
-                    {% for name, value in order.shipping_info %}
-                        {{ value }}<br>
+                    {% for row in order.shipping_info %}
+                        {{ row.value }}<br>
                     {% endfor %}
                 {% endif %}
             </div>
