@@ -46,7 +46,7 @@
 
         <h1 itemprop="name" class="product_title entry-title">{{ product.title }}</h1>
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-            <p class="price">
+            <p class="price" style="display: none">
                 <span class="octocart-Price-amount amount">
                     {{ product.price|price }}
                 </span>
@@ -61,34 +61,53 @@
 
         {{ form_open({ 'class': 'cart', 'data-request': 'onAddToCart', 'data-request-success': 'location.reload()' }) }}
 
-        {% if product.productAttributes.count %}
-            <div class="product-attributes">
-                <p><strong>Attributes: </strong></p>
-                {% set name = '' %}
-                {% set first = false %}
-                {% for attribute in product.productAttributes %}
-                    {% if name != attribute.name %}
-                        {% set name = attribute.name %}
-                        {% set first = true %}
-                        <strong style="display: block">{{ attribute.name }}:</strong>
-                    {% else %}
-                        {% set first = false %}
-                    {% endif %}
-                    <div class="radio" style="display: inline-block;">
-                        <label><input value="{{ attribute.value }}" type="radio" name="attributes[{{ attribute.name }}]" {% if first == true %} checked {% endif %}> {{ attribute.value }}</label>
-                    </div>
-                {% endfor %}
+
+        {% if product.variations is not empty %}
+
+            <div class="product-variations">
+                <p><strong>Variations: </strong></p>
+                <select name="productId">
+                    {% for variation in product.variations %}
+                        <option value="{{ variation.id }}">{{ variation.title }} - {% if variation.sale_price %}{{ variation.sale_price|price() }}{% else %}{{ variation.price|price() }}{% endif %}</option>
+                    {% endfor %}
+                </select>
+                <p>&nbsp;</p>
                 <hr>
             </div>
-        {% endif %}
 
-        {% if product.sale_price %}
-            <h3><del>{{ product.price|price() }}</del> {{ product.sale_price|price() }}</h3>
         {% else %}
-            <h3>{{ product.price|price() }}</h3>
-        {% endif %}
 
-        <input type="hidden" name="productId" value="{{ product.id }}" />
+            {% if product.productAttributes.count %}
+                <div class="product-attributes">
+                    <p><strong>Attributes: </strong></p>
+                    {% set name = '' %}
+                    {% set first = false %}
+                    {% for attribute in product.productAttributes %}
+                        {% if name != attribute.name %}
+                            {% set name = attribute.name %}
+                            {% set first = true %}
+                            <strong style="display: block">{{ attribute.name }}:</strong>
+                        {% else %}
+                            {% set first = false %}
+                        {% endif %}
+                        <div class="radio" style="display: inline-block;">
+                            <label><input value="{{ attribute.value }}" type="radio" name="attributes[{{ attribute.name }}]" {% if first == true %} checked {% endif %}> {{ attribute.value }}</label>
+                        </div>
+                    {% endfor %}
+                    <p>&nbsp;</p>
+                    <hr>
+                </div>
+            {% endif %}
+
+            {% if product.sale_price %}
+                <h3><del>{{ product.price|price() }}</del> {{ product.sale_price|price() }}</h3>
+            {% else %}
+                <h3>{{ product.price|price() }}</h3>
+            {% endif %}
+
+            <input type="hidden" name="productId" value="{{ product.id }}" />
+
+        {% endif %}
 
         <div class="quantity">
             <input type="number" step="1" min="1" max="" name="quantity" value="1" title="Qty" class="input-text qty text" size="4" pattern="[0-9]*" inputmode="numeric" />
