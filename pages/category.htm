@@ -15,6 +15,10 @@ productDisplayPage = "product"
 function onEnd() {
     $slug = $this->param('slug');
     $category = Xeor\OctoCart\Models\Category::where('slug', $slug)->first();
+    if (!$category) {
+        $this->setStatusCode(404);
+        return $this->controller->run('404');    
+    }
     $this->page->title = $category->title;
 }
 ==
