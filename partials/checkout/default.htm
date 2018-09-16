@@ -248,18 +248,20 @@
         </table>
 
         <div id="payment" class="octocart-checkout-payment">
-            <ul class="oc_payment_methods payment_methods methods">
-                <li>Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.</li>		</ul>
+            {#<ul class="oc_payment_methods payment_methods methods">
+                <li>Sorry, it seems that there are no available payment methods for your state. Please contact us if you require assistance or wish to make alternate arrangements.</li>		</ul>#}
             <div class="form-row place-order">
                 <noscript>
                     Since your browser does not support JavaScript, or it is disabled, please ensure you click the <em>Update Totals</em> button before placing your order. You may be charged more than the amount stated above if you fail to do so.			<br/><input type="submit" class="button alt" name="octocart_checkout_update_totals" value="Update totals" />
                 </noscript>
 
 
+                <input type="hidden" name="place_order" value="1" />
                 <button class="button alt" type="submit">Place order</button>
 
             </div>
         </div>
+
     </div>
 
 </form>
