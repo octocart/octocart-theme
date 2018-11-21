@@ -6,4 +6,14 @@ is_hidden = 0
 [product]
 slug = "{{ :slug }}"
 ==
+function onEnd() {
+  $slug = $this->param('slug');
+  $product = Xeor\OctoCart\Models\Product::where('slug', $slug)->first();
+  if (!$product) {
+      $this->setStatusCode(404);
+     return $this->controller->run('404');    
+  }
+  $this->page->title = $product->title;
+}
+==
 {% component 'product' %}
